@@ -16,6 +16,7 @@ const Form = ({ onSuccess, onError }) => {
       try {
         await mockContactApi();
         setSending(false);
+        onSuccess(); 
       } catch (err) {
         setSending(false);
         onError(err);
@@ -27,8 +28,8 @@ const Form = ({ onSuccess, onError }) => {
     <form onSubmit={sendContact}>
       <div className="row">
         <div className="col">
-          <Field placeholder="" label="Nom" />
-          <Field placeholder="" label="Prénom" />
+          <Field placeholder="" label="Nom" name="Nom"/>
+          <Field placeholder="" label="Prénom" name="Prénom" />
           <Select
             selection={["Personel", "Entreprise"]}
             onChange={() => null}
