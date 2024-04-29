@@ -1,12 +1,13 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import Field, { FIELD_TYPES } from "../../components/Field";
 import Select from "../../components/Select";
 import Button, { BUTTON_TYPES } from "../../components/Button";
 
-const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 1000); })
+const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 600); })
 
 const Form = ({ onSuccess, onError }) => {
+  const formRef = useRef()
   const [sending, setSending] = useState(false);
   const sendContact = useCallback(
     async (evt) => {
@@ -17,6 +18,7 @@ const Form = ({ onSuccess, onError }) => {
         await mockContactApi();
         setSending(false);
         onSuccess(); 
+        formRef.current.reset();
       } catch (err) {
         setSending(false);
         onError(err);
@@ -25,7 +27,7 @@ const Form = ({ onSuccess, onError }) => {
     [onSuccess, onError]
   );
   return (
-    <form onSubmit={sendContact}>
+    <form ref={formRef} onSubmit={sendContact}>
       <div className="row">
         <div className="col">
           <Field placeholder="Nom" label="Nom" name="Nom"/>
