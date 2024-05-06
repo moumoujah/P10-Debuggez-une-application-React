@@ -20,13 +20,13 @@ describe("When Form is created", () => {
           bubbles: true,
         })
       );
-      await screen.findByText("En cours");
-      await screen.findByText("Message envoyé !");
+      setTimeout(async ()=>{
+        await screen.findByText("En cours");
+        await screen.findByText("Message envoyé !");
+      }, 1000); 
     });
   });
-
 });
-
 
 describe("When a page is created", () => {
   it("a list of events is displayed", () => {

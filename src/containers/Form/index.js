@@ -9,9 +9,14 @@ const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 600)
 const Form = ({ onSuccess, onError }) => {
   const formRef = useRef()
   const [sending, setSending] = useState(false);
+  const [selectOption, setSelectOption] = useState(null);
   const sendContact = useCallback(
     async (evt) => {
       evt.preventDefault();
+
+      if(!selectOption) {
+        return;
+      }
       setSending(true);
       // We try to call mockContactApi
       try {
@@ -19,13 +24,15 @@ const Form = ({ onSuccess, onError }) => {
         setSending(false);
         onSuccess(); 
         formRef.current.reset();
+        setSelectOption(null)
       } catch (err) {
         setSending(false);
         onError(err);
       }
     },
-    [onSuccess, onError]
+    [onSuccess, onError, selectOption]
   );
+  
   return (
     <form ref={formRef} onSubmit={sendContact}>
       <div className="row">
@@ -34,7 +41,7 @@ const Form = ({ onSuccess, onError }) => {
           <Field placeholder="Prénom" label="Prénom" name="Prénom" />
           <Select
             selection={["Personel", "Entreprise"]}
-            onChange={() => null}
+            onChange={(value) => setSelectOption(value)}
             label="Personel / Entreprise"
             type="large"
             titleEmpty
