@@ -46,7 +46,7 @@ const Slider = () => {
           </div>
         </div>
       ))} 
-      {/* extraction des boutons radio en dehors du mapping pour éviter les doublons*/}
+     {/* extraction des boutons radio en dehors du mapping pour éviter les doublons  */}
       <div className="SlideCard__paginationContainer">
         <div className="SlideCard__pagination">
           {byDateDesc?.map((event, radioIdx) => (
