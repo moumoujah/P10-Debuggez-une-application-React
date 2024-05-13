@@ -14,6 +14,7 @@ import ModalEvent from "../../containers/ModalEvent";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
+  // Obtenir la dernière prestation 
   const {data} = useData()
   const last = data && data.events && data.events.length > 0
     ? data.events[data.events.length - 1]
@@ -26,7 +27,7 @@ const Page = () => {
       <section className="SliderContainer">
         <Slider />
       </section>
-      <section className="ServicesContainer" id="nos-services">
+      <section className="ServicesContainer" id="nos-services"> {/* ajout des ancres pour le click dans le header  */}
         <h2 className="Title" >Nos services</h2>
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
         <div className="ListContainer">
@@ -56,11 +57,11 @@ const Page = () => {
         </div>
       </section>
       <section className="EventsContainer">
-        <h2 className="Title"  id="nos-realisations">Nos réalisations</h2>
+        <h2 className="Title"  id="nos-realisations">Nos réalisations</h2> {/* ajout des ancres pour le click dans le header  */}
         <EventList />
       </section>
-      <section className="PeoplesContainer" id="notre-equipe">
-        <h2 className="Title" >Notre équipe</h2>
+      <section className="PeoplesContainer" id="notre-equipe"> {/* ajout des ancres pour le click dans le header  */}
+        <h2 className="Title" >Notre équipe</h2> 
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
         <div className="ListContainer">
           <PeopleCard
@@ -120,15 +121,15 @@ const Page = () => {
     <footer className="row" >
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        {last && <Modal 
+        {last && <Modal // vérifie s'il trouve le last avant d'afficher le component
           Content={
-            <ModalEvent 
+            <ModalEvent // Ajout de ModalEvent pour ouvrir la modale avec la description du dernier évenement
               event={last}
             />}
         >
           {({ setIsOpened }) => (
             <EventCard
-              onClick={() => setIsOpened(true)}
+              onClick={() => setIsOpened(true)} 
               imageSrc={last?.cover}
               title={last?.title}
               date={new Date(last?.date)}
@@ -141,7 +142,7 @@ const Page = () => {
         <h3>Contactez-nous</h3>
         <address>45 avenue de la République, 75000 Paris</address>
         <div>01 23 45 67 89</div>
-       <a href="mailto:contact@724events.com">contact@724events.com</a>
+        <a href="mailto:contact@724events.com">contact@724events.com</a> {/* Ajout d'un mailto sur l'adresse email*/}
         <div>
           <a href="#twitch">
             <Icon name="twitch" />
