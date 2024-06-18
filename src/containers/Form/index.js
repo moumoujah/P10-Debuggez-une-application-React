@@ -19,7 +19,7 @@ const Form = ({ onSuccess, onError }) => {
       const texte = document.createTextNode("Choisissez une valeur");
 
       if(!selectOption) {
-        console.log("test");
+      
         // Ajout du d'une class Error si aucune valeur n'est sélectionné
         element.classList.add("Error_");
         // Ajoutez le nœud texte à l'élément
